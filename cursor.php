@@ -1,6 +1,6 @@
 <?php
 /**
- * Configuration hack.
+ * Go 88mph and set table prefix to load the past.
  *
  * @since  1.0.0
  * @package  aubreypwd\Delorean
