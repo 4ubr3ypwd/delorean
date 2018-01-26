@@ -203,8 +203,9 @@ class App {
 	 * @since  1.0.0
 	 */
 	public function attach() {
-		$this->shared = new Shared();
-		$this->db     = new DB();
+		$this->shared   = new Shared();
+		$this->cursors  = new Cursors();
+		$this->timeline = new Timeline();
 	}
 
 	/**
@@ -214,7 +215,8 @@ class App {
 	 * @since  1.0.0
 	 */
 	public function hooks() {
-		$this->db->hooks();
+		$this->cursors->hooks();
+		$this->timeline->hooks();
 	}
 
 	/**
