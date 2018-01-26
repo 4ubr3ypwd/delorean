@@ -206,7 +206,7 @@ class Cursors {
 			$import = "mysql -u {$db_user} -p{$db_password} {$db_name} < $dump_file";
 
 			// Run the commands.
-			shell_exec( "$dump && $replace && $import " );
+			shell_exec( "$dump && $replace && $import" );
 		}
 	}
 
@@ -236,7 +236,16 @@ class Cursors {
 		}
 
 		$cursors = file_get_contents( $this->cursor_file() );
-		return explode( ',', $cursors );
+		$cursors = explode( ',', $cursors );
+		$cursors_exist = array();
+
+		foreach ( $cursors as $cursor ) {
+			if( $this->cursor_exists( $cursor ) ) {
+				$cursors_exist = array_merge( $cursors_exist, array( $cursor ) );
+			}
+		}
+
+		return $cursors_exist;
 	}
 
 	/**

@@ -24,6 +24,14 @@ class Timeline {
 	 */
 	public function hooks() {
 		add_filter( 'admin_footer_text', array( $this, 'timeline' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'scripts' ) );
+	}
+
+	public function scripts() {
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_style( 'jquery-ui-theme-base', plugins_url( 'assets/css/jquery-ui.css', app()->plugin_file ), array(), app()->version() );
+		wp_enqueue_script( 'delorean-slider', plugins_url( 'assets/js/delorean-slider.js', app()->plugin_file ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider' ), app()->version(), false );
 	}
 
 	/**
@@ -38,18 +46,14 @@ class Timeline {
 	 */
 	public function timeline( $default ) {
 		global $table_prefix;
+		global $cursor;
 		ob_start();
 		?>
 
-		<code style="display: inline-block; padding: 10px; border-radius: 3px; position: fixed; bottom: 20px; right: 20px; z-index: 999999999;">
-			<a href="<?php echo esc_url( add_query_arg( 'cursor', 0, $_SERVER['REQUEST_URI'] ) ); ?>">0</a>
-
-			<?php foreach ( app()->cursors->get_cursors() as $cursor ) : ?>
-				<?php if ( app()->cursors->cursor_exists( $cursor ) ) : ?>
-					<<?php echo wp_kses_post( $this->tag( $cursor ) ); ?> href="<?php echo esc_url( $this->link( $cursor ) ); ?>"><?php echo absint( $cursor ); ?></a>
-				<?php endif; ?>
-			<?php endforeach; ?>
-		</code>
+		<div id="cursors" data-cursor="<?php echo absint( $cursor ); ?>" data-cursors="<?php echo esc_attr( wp_json_encode( app()->cursors->get_cursors() ) ); ?>">
+			<div class="ui-slider-handle"></div>
+		</div>
+		<span id="cursors-chosen"></span>
 
 		<?php
 		return ob_get_clean();
