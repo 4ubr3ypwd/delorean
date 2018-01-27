@@ -39,6 +39,10 @@
 	left: 99% !important;
 }
 
+#delorean #cursors .ui-slider-handle[style="left: 0%;"] {
+	left: 1% !important;
+}
+
 #delorean .tooltips {
 	float: right;
 	width: auto;
