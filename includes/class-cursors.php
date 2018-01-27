@@ -240,7 +240,7 @@ class Cursors {
 		$cursors_exist = array();
 
 		foreach ( $cursors as $cursor ) {
-			if( $this->cursor_exists( $cursor ) ) {
+			if ( $this->cursor_exists( $cursor ) ) {
 				$cursors_exist = array_merge( $cursors_exist, array( $cursor ) );
 			}
 		}

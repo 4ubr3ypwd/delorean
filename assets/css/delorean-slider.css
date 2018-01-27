@@ -39,9 +39,21 @@
 	left: 99% !important;
 }
 
-#delorean .tooltip.show {
-	position: absolute;
-    opacity: 1;
-    display: block;
-    background: white;
+#delorean .tooltips {
+	float: right;
+	width: auto;
+	display: block;
+	padding: 3px 0 0 0;
+}
+
+#delorean .tooltips .tooltip {
+	display: none;
+}
+
+#delorean .tooltips .tooltip.label {
+	text-transform: none;
+}
+
+#delorean .tooltips .tooltip.show {
+	display: block;
 }

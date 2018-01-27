@@ -75,12 +75,28 @@ if ( ! window.hasOwnProperty( 'deloreanSlider' ) ) {
 				min: 0,
 				max: cursors.length,
 				step: 1,
+				slide: function( event, choice ) {
+					if ( cursors[ choice.value ] ) {
+						choice = cursors[ choice.value ];
+					} else {
+						choice = 0;
+					}
+
+					// Hide all tooltips.
+					$( '#delorean .tooltips div.tooltip' ).removeClass( 'show' );
+
+					// Get the tooltip we want to show and show it.
+					var $tooltip = $( '#delorean .tooltips div[data-cursor="' + choice + '"]' );
+					$tooltip.addClass( 'show' );
+				},
 				stop: function( event, choice ) {
 					if ( cursors[ choice.value ] ) {
-						window.location.href = addQueryArg( window.location.href, 'cursor', cursors[ choice.value ] );
+						choice = cursors[ choice.value ];
 					} else {
-						window.location.href = addQueryArg( window.location.href, 'cursor', '0' );
+						choice = 0;
 					}
+
+					window.location.href = addQueryArg( window.location.href, 'cursor', choice );
 				}
 			} );
 		}

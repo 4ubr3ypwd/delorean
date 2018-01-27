@@ -57,6 +57,21 @@ class Timeline {
 				<div class="ui-slider-handle"></div>
 			</div>
 			<span class="label">Delorean</span>
+			<div class="tooltips">
+				<?php foreach ( app()->cursors->get_cursors() as $cursor ) : ?>
+					<div class="tooltip label" data-cursor="<?php echo absint( $cursor ); ?>">
+						<div class="diff-title">
+							<div class="author-card">
+								<div class="author-info">
+									<span class="byline"><?php echo absint( $cursor ); ?></span>
+								</div>
+							</div>
+
+							<div class="revisions-tooltip-arrow"><span></span></div>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
 
 		<?php
